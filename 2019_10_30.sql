@@ -71,4 +71,14 @@ FROM user_tables;
 SELECT 'SELECT * FROM ' || table_name AS QUERY
 FROM user_tables;
 
+
+--desc table
+--테이블에 정의된 컬럼을 알고 싶을 때
+--1.desc
+--2.select * ....
+desc emp;
+
+SELECT *
+FROM emp;
+
 COMMIT;
