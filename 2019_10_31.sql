@@ -59,6 +59,92 @@ FROM emp
 WHERE hiredate >= TO_DATE('1982/01/01','YYYY/MM/DD')
 AND hiredate <= TO_DATE('1983/01/01','YYYY/MM/DD');
 
+--IN 연산자
+--COL IN (Values)
+--부서번호가 10 혹은 20인 직원 조회
+SELECT *
+FROM emp
+WHERE deptno = 10
+OR deptno = 20;
+
+SELECT *
+FROM emp
+WHERE deptno IN (10, 20);
+
+--실습 3) userid가 brown, cony, sally인 데이터를 조회
+--IN연산자 사용
+
+SELECT userid AS "아이디", usernm AS "이름", alias AS "별명"
+FROM users
+WHERE userid IN ('brown', 'cony', 'sally');
+
+--LIKE 연산자
+--COL LIKE 'S%'
+--COL의 값이 대문자 S로 시작하는 모든 값
+--COL LIKE 'S____' <= 'S _ _ _ _'
+--COL의 값이 대문자 S로 시작하고 문자열의 개수가 5개인 값
+
+--emp 테이블에서 직원이름이 S로 시작하는 모든 직원 조회
+SELECT *
+FROM emp
+WHERE ename LIKE 'S%';
+
+SELECT *
+FROM emp
+WHERE ename LIKE 'S____';
+
+--실습 4) member 테이블에서 회원의 성이 신씨인 사람의 mem_id, mem_name을 조회
+SELECT mem_id, mem_name
+FROM member
+WHERE mem_name LIKE '신%';
+
+--실습 5) member 테이블에서 회원의 이름에 이가 들어간 사람의 mem_id와 mem_name을 조회
+SELECT mem_id, mem_name
+FROM member
+WHERE mem_name LIKE '%이%';
+
+--NULL 비교
+--col IS NULL
+--EMP 테이블에서 MGR 정보가 없는 사람(NULL) 조회
+
+SELECT *
+FROM emp
+WHERE mgr IS NULL;
+//WHERE mgr IS NOT NULL;
+
+--소속 부서가 10번이 아닌 직원들
+SELECT *
+FROM emp
+WHERE deptno != '10';
+
+--실습 6) emp 테이블에서 상여(comm)가 있는 회원의 정보 조회
+SELECT *
+FROM emp
+WHERE comm IS NOT NULL;
+
+SELECT *
+FROM emp
+WHERE mgr = 7698
+AND sal >= 1000;
+
+SELECT *
+FROM emp
+WHERE mgr = 7698
+OR sal >= 1000;
+
+--논리 연산 NOT
+--emp 테이블에서 관리자(mgr) 사번이 7698이 아니고, 7839가 아닌 직원들 조회
+SELECT *
+FROM emp
+WHERE mgr != 7698
+AND mgr != 7839;
+//WHERE mgr NOT IN (7698, 7839);
+
+
+
+
+
+
 
 
 
