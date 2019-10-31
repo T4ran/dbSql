@@ -140,10 +140,27 @@ WHERE mgr != 7698
 AND mgr != 7839;
 //WHERE mgr NOT IN (7698, 7839);
 
+--IN, NOT IN 연산자의 NULL 처리
+--emp 테이블에서 관리자(mgr) 사번이 7698, 7839 또는 null이 아닌 직원들 조회
+SELECT *
+FROM emp
+WHERE mgr NOT IN (7698, 7839)
+AND mgr IS NOT NULL;
+//WHERE mgr NOT IN (7698, 7839, NULL); <= 잘못된 예시
+//IN 연산자에서 결과값에 NULL이 있을 경우 의도하지 않는 동작을 한다.
 
+--실습 7) emp 테이블에서 job이 SALESMAN이고 입사일자가 1981년06월01일 이후인 직원의 정보 조회
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN'
+AND hiredate > TO_DATE('1981/06/01','YYYY/MM/DD');
 
-
-
+--실습 8) emp 테이블에서 부서번호가 10번이 아니고 입사일자가 1981년 6월 1일 이후인 직원의 정보 조회
+--IN, NOT IN 연산자 사용불가
+SELECT *
+FROM emp
+WHERE deptno != 10
+AND hiredate > TO_DATE('1981/06/01','YYYY/MM/DD');
 
 
 
