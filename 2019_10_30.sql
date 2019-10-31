@@ -81,4 +81,15 @@ desc emp;
 SELECT *
 FROM emp;
 
+--WHERE절, 조건 연산자
+SELECT *
+FROM users
+WHERE userid = 'brown';
+
+--usernm이 샐리인 데이터를 조회하는 쿼리 작성
+SELECT *
+FROM users
+WHERE usernm = '샐리';
+
+
 COMMIT;
