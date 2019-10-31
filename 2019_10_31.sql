@@ -162,6 +162,28 @@ FROM emp
 WHERE deptno != 10
 AND hiredate > TO_DATE('1981/06/01','YYYY/MM/DD');
 
+--실습 9) emp 테이블에서 부서 번호가 10번이 아니고 입사일자가 1981년 6월 1일 이후인 직원 정보 조회
+--NOT IN 연산자 사용
+SELECT *
+FROM emp
+WHERE deptno NOT IN (10)
+AND hiredate > TO_DATE('1981/06/01','YYYY/MM/DD');
 
+--실습 10) emp 테이블에서 부서번호가 10번이 아니고 입사일자가 1981년 6월 1일 이후인 직원 정보 조회
+--(부서는 10, 20, 30만 있다고 가정하고 IN연산자를 사용)
+SELECT *
+FROM emp
+WHERE deptno IN (20,30)
+AND hiredate > TO_DATE('1981/06/01','YYYY/MM/DD');
 
+--실습 11) emp 테이블에서 job이 SALESMAN이거나 입사일자가 1981년 6월 1일 이후인 직원 정보 조회
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN'
+OR hiredate > TO_DATE('1981/06/01','YYYY/MM/DD');
 
+--실습 12) emp테이블에서 job이 SALESMAN이거나 사원번호가 78로 시작하는 직원의 정보 조회
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN'
+OR empno LIKE '78%';
