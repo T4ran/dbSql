@@ -141,3 +141,17 @@ AND rn <= 20;
 
 SELECT *
 FROM emp;
+
+--FUNCTION
+--DUAL 테이블 조회
+SELECT 'ABCDEFG' AS msg
+FROM DUAL;
+
+SELECT 'HELLO WORLD'
+FROM emp;
+
+--문자열 대소문자 관련 함수
+--LOWER, UPPER, INITCAP
+SELECT LOWER('Hello, World'), UPPER('Hello, World'), INITCAP('heLLo, wOrlD')
+FROM dual;
+
