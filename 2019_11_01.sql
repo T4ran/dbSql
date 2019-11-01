@@ -155,3 +155,29 @@ FROM emp;
 SELECT LOWER('Hello, World'), UPPER('Hello, World'), INITCAP('heLLo, wOrlD')
 FROM dual;
 
+--FUNCTION은 WHERE절에서도 사용가능
+SELECT *
+FROM emp
+WHERE ename = UPPER('smith');
+
+SELECT *
+FROM emp
+WHERE LOWER(ename) = 'smith';
+
+--좌변(TABLE의 컬럼)을 가공하게 되면 INDEX를 정상적으로 사용하지 못한다.
+
+--CONCAT : 문자열 결합 - 두개의 문자열을 결합하는 함수
+--SUBSTR : 문자열의 부분 문자열
+--LENGTH : 문자열의 길이
+--INSTR  : 문자열에 특정 문자열이 등장하는 첫번째 인덱스    세번째 파라미터는 문자열 인덱스 이후부터 찾는다는 의미
+--LPAD   : 문자열의 왼쪽에 특정 문자열을 삽입, 두번째 파라미터의 숫자보다 작으면 세번째 파라미터의 문자로 채운다.
+--RPAD   : 문자열의 오른쪽에 특정 문자열을 삽입, 두번째 파라미터의 숫자보다 작으면 세번째 파라미터의 문자로 채운다.
+SELECT CONCAT('HELLO',CONCAT(',',' WORLD')) CONCAT,
+       SUBSTR('HELLO, WORLD', 0, 5) SUBSTR1,
+       SUBSTR('HELLO, WORLD', 1, 5) SUBSTR2,
+       LENGTH('HELLO, WORLD') LENGTH,
+       INSTR('HELLO, WORLD', 'O') INSTR,
+       INSTR('HELLO, WORLD', 'O', 6) INSTR,
+       LPAD('HELLO, WORLD', 15, '*') LPAD,
+       RPAD('HELLO, WORLD', 15, '*') RPAD
+FROM dual;
