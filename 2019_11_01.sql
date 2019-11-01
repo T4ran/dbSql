@@ -172,6 +172,7 @@ WHERE LOWER(ename) = 'smith';
 --INSTR  : 문자열에 특정 문자열이 등장하는 첫번째 인덱스    세번째 파라미터는 문자열 인덱스 이후부터 찾는다는 의미
 --LPAD   : 문자열의 왼쪽에 특정 문자열을 삽입, 두번째 파라미터의 숫자보다 작으면 세번째 파라미터의 문자로 채운다.
 --RPAD   : 문자열의 오른쪽에 특정 문자열을 삽입, 두번째 파라미터의 숫자보다 작으면 세번째 파라미터의 문자로 채운다.
+--        세번째 파라미터가 없으면 공백문자가 삽입된다.
 SELECT CONCAT('HELLO',CONCAT(',',' WORLD')) CONCAT,
        SUBSTR('HELLO, WORLD', 0, 5) SUBSTR1,
        SUBSTR('HELLO, WORLD', 1, 5) SUBSTR2,
