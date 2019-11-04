@@ -97,6 +97,41 @@ SELECT
     TO_CHAR(SYSDATE, 'DD-MM-YYYY') DT_DD_MM_YYYY
 FROM dual;
 
+--날짜의 반올림(ROUND), 절삭(TRUNC)
+--ROUND(DATE, '포맷') YYYY,MM,DD
+SELECT ename, TO_CHAR(hiredate, 'YYYY/MM/DD HH24:MI:SS') hiredate,
+       TO_CHAR(ROUND(hiredate + 0.6, 'DD'), 'YYYY/MM/DD HH24:MI:SS') round_yyyy
+FROM emp
+WHERE ename = 'SMITH';
 
+--TRUNC 생략
 
+--날짜 연산 함수
+--MONTHS_BETWEEN(DATE, DATE) : 두 날짜 사이의 개월 수
+SELECT ename, TO_CHAR(hiredate, 'YYYY/MM/DD HH24:MI:SS') hiredate,
+       MONTHS_BETWEEN(SYSDATE, hiredate) months_between,
+       MONTHS_BETWEEN(TO_DATE('20191117','YYYYMMDD'), hiredate) months_between
+FROM emp
+WHERE ename='SMITH';
 
+--ADD_MONTHS(DATE, 개월수) : DATE에 개월수가 지난 날짜
+SELECT ename, TO_CHAR(hiredate, 'YYYY/MM/DD HH24:MI:SS') hiredate,
+    ADD_MONTHS(hiredate,467) add_months
+FROM emp
+WHERE ename='SMITH';
+
+--NEXT_DAY(DATE, 요일) : DATE 이후 첫번째 요일의 날짜
+SELECT SYSDATE, NEXT_DAY(SYSDATE, '토') next_sat
+FROM dual;
+
+--LAST_DAY(DATE) : 당월의 마지막 일을 반환
+SELECT SYSDATE, LAST_DAY(SYSDATE)
+FROM dual;
+
+SELECT TO_DATE('20191104', 'YYYYMMDD') - TO_DATE('20191101', 'YYYYMMDD') test,
+TO_DATE('20191201', 'YYYYMMDD') - TO_DATE('20191101', 'YYYYMMDD') test2
+FROM dual;
+
+--201908 의 일수
+SELECT ADD_MONTHS(TO_DATE('201908', 'YYYYMM'),1) - TO_DATE('201908', 'YYYYMM') DT
+FROM dual;
