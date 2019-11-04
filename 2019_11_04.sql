@@ -1,0 +1,86 @@
+SELECT *
+FROM emp
+WHERE job = 'SALESMAN'
+OR hiredate >= TO_DATE('1981.06.01','YYYY.MM.DD');
+
+--ROWNUM
+SELECT ROWNUM, e.*
+FROM emp e
+ORDER BY ename;
+
+SELECT ROWNUM, a.*
+FROM
+(SELECT e.*
+FROM emp e
+ORDER BY ename) a;
+
+SELECT a.*
+FROM
+(SELECT ROWNUM rn, e.*
+FROM emp e
+ORDER BY ROWNUM) a
+WHERE rn BETWEEN 10 AND 14;
+
+--CONCAT : 문자열 결합 - 두개의 문자열을 결합하는 함수
+--SUBSTR : 문자열의 부분 문자열
+--LENGTH : 문자열의 길이
+--INSTR  : 문자열에 특정 문자열이 등장하는 첫번째 인덱스    세번째 파라미터는 문자열 인덱스 이후부터 찾는다는 의미
+--LPAD   : 문자열의 왼쪽에 특정 문자열을 삽입, 두번째 파라미터의 숫자보다 작으면 세번째 파라미터의 문자로 채운다.
+--RPAD   : 문자열의 오른쪽에 특정 문자열을 삽입, 두번째 파라미터의 숫자보다 작으면 세번째 파라미터의 문자로 채운다.
+--        세번째 파라미터가 없으면 공백문자가 삽입된다.
+SELECT CONCAT('HELLO',CONCAT(',',' WORLD')) CONCAT,
+       SUBSTR('HELLO, WORLD', 0, 5)
+       SUBSTR1,
+       SUBSTR('HELLO, WORLD', 1, 5) SUBSTR2,
+       LENGTH('HELLO, WORLD') LENGTH,
+       INSTR('HELLO, WORLD', 'O') INSTR,
+       INSTR('HELLO, WORLD', 'O', 6) INSTR,
+       LPAD('HELLO, WORLD', 15, '*') LPAD,
+       RPAD('HELLO, WORLD', 15, '*') RPAD,
+       --REPLACE(원본문자열, 원본문자열에서 변경하고자하는 대상 문자열, 변경문자열)
+       REPLACE(REPLACE('HELLO, WORLD','HELLO','hello'), 'WORLD', 'world')
+FROM dual;
+
+--ROUND(대상숫자, 반올림 결과 자리수)
+SELECT ROUND(105.54, 1) r1,
+       ROUND(105.55, 1) r2,
+       ROUND(105.55, 0) r3,
+       ROUND(105.55, -1) r4
+FROM dual;
+
+SELECT empno, ename, sal, (sal - MOD(sal,1000))/1000 qutient, MOD(sal, 1000) reminder
+FROM emp;
+
+--TRUNC
+SELECT TRUNC(105.54, 1) t1,
+       TRUNC(105.55, 1) t2,
+       TRUNC(105.55, 0) t3,
+       TRUNC(105.55, -1) t4
+FROM dual;
+
+--SYSDATE : 오라클이 설치된 서버의 현재 날짜 + 시간정보를 리턴
+--별도의 인자가 없는 함수
+
+--TO_CHAR : DATE 타입을 문자열로 변환
+--날짜를 문자열로 변환시에 포맷을 지정
+SELECT TO_CHAR(SYSDATE + 1*1/24/60/60,'RRRR/MM/DD HH24/MI/SS'), TO_CHAR(SYSDATE + 2*1/24/60/60,'RRRR/MM/DD HH24/MI/SS')
+FROM dual;
+
+--date 실습 1
+--2019/12/31을 date형식으로 표현
+SELECT TO_CHAR(TO_DATE('2019/12/31', 'RRRR/MM/DD'), 'RRRR/MM/DD') LASTDAY,
+--5일 이전날짜
+    TO_CHAR(TO_DATE('2019/12/31', 'RRRR/MM/DD')-5, 'RRRR/MM/DD') LASTDAY_BEFORE5,
+--현재날짜
+    TO_CHAR(SYSDATE, 'RRRR/MM/DD') NOW,
+--현재날짜에서 3일전
+    TO_CHAR(SYSDATE-3, 'RRRR/MM/DD') NOW_BEFORE3
+FROM dual;
+
+
+
+
+
+
+
+
