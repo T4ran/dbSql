@@ -1,3 +1,7 @@
+--UPDATE TABLE_NAME SET COLLUM_NAME = DATA
+--WHERE COLLUM_NAME = DATA;
+--COMMIT;
+
 --년월 파라미터가 주어졌을 때 해당 년월의 일수를 구하는 문제
 --201911 => 30 // 201912 => 31
 
@@ -80,8 +84,54 @@ DECODE(deptno,
         'DDIT') DNAME
 FROM emp;
 
+SELECT empno, ename, TO_CHAR(hiredate, 'YYYY/MM/DD') hiredate,
+CASE
+    --WHEN MOD(TO_CHAR(hiredate, 'YYYY'),2) = MOD(TO_CHAR(SYSDATE, 'YYYY'),2)   --실행됨
+    --WHEN MOD(TO_CHAR(TO_DATE(SYSDATE-hiredate),'YYYY'),2) = 0                 --에러
+    WHEN MOD(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(hiredate,'YYYY'),2) = 0
+    THEN '건강검진 대상자'
+    else '건강검진 비대상자'
+END contact_to_doctor
+FROM emp;
 
+SELECT
+CASE
+    WHEN MOD(TO_CHAR(SYSDATE,'YYYY'),2)=0 THEN '짝수'
+    else '홀수'
+END this_year
+FROM dual;
 
+SELECT empno, ename, hiredate,
+CASE
+    WHEN MOD(TO_CHAR(hiredate,'YYYY'),2)=0 THEN '짝수'
+    else '홀수'
+END this_year
+FROM emp;
 
+SELECT userid, usernm, alias, reg_dt,
+CASE
+    WHEN MOD(TO_CHAR(SYSDATE,'YYYY')-TO_CHAR(reg_dt,'YYYY'),2) = 0
+    THEN '건강검진 대상자'
+    else '건강검진 비대상자'
+END contact_to_doctor
+FROM users;
+
+--그룹함수(AVG, MAX, MIN, SUM, COUNT)
+--그룹함수는 NULL값을 계산대상에서 제외한다.
+--SUM(comm), COUNT(*), COUNT(mgr)
+
+--직원중 가장 높은 급여를 받는 사람
+SELECT MAX(sal) max_sal, MIN(sal) min_sal, ROUND(AVG(sal),2) avg_sal, SUM(sal), COUNT(sal)
+FROM emp;
+
+--부서별 가장 높은 급여
+--GROUP BY 절에 기술되지 않은 컬럼이 SELECT절에 기술될 경우 에러
+SELECT
+DECODE(deptno, 10, 'ACCOUNTING', 20, 'RESEARCH', 30, 'SALES', 'DDIT') DNAME,
+MAX(sal) max_sal, MIN(sal) min_sal, ROUND(AVG(sal), 2) avg_sal, SUM(sal) sum_sal,
+COUNT(sal) count_sal, COUNT(mgr) count_mgr, COUNT(*) count_all
+FROM emp
+GROUP BY deptno
+ORDER BY max_sal DESC;
 
 
