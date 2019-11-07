@@ -126,3 +126,37 @@ desc dept;
 SELECT a.empno, a.ename, a.deptno, b.dname
 FROM emp a JOIN dept b ON(a.deptno = b.deptno)
 ORDER BY a.deptno;
+
+--실습 1
+SELECT a.empno, a.ename, a.deptno, b.dname
+FROM emp a JOIN dept b ON(a.deptno = b.deptno)
+WHERE a.deptno = 10 OR a.deptno = 30;
+
+SELECT a.empno, a.ename, a.deptno, b.dname
+FROM emp a, dept b
+WHERE a.deptno = b.deptno
+AND (a.deptno = 10 OR a.deptno = 30);
+
+--실습 2
+SELECT a.empno, a.ename, a.sal, a.deptno, b.dname
+FROM emp a, dept b
+WHERE a.deptno = b.deptno
+AND sal > 2500
+ORDER BY a.deptno;
+
+--실습 3
+SELECT a.empno, a.ename, a.sal, a.deptno, b.dname
+FROM emp a, dept b
+WHERE a.deptno = b.deptno
+AND sal > 2500
+AND empno > 7600
+ORDER BY a.deptno;
+
+--실습 4
+SELECT a.empno, a.ename, a.sal, a.deptno, b.dname
+FROM emp a, dept b
+WHERE a.deptno = b.deptno
+AND sal > 2500
+AND empno > 7600
+AND dname = 'RESEARCH'
+ORDER BY a.deptno;
