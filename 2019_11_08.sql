@@ -140,10 +140,7 @@ FROM emp);
 --½Ç½À 3
 SELECT *
 FROM emp
-WHERE deptno = (SELECT deptno
+WHERE deptno IN (SELECT deptno
 FROM emp
-WHERE ename = 'SMITH')
-OR deptno = (SELECT deptno
-FROM emp
-WHERE ename = 'WARD')
-ORDER BY deptno;
+WHERE ename = 'SMITH'
+OR ename = 'WARD');
