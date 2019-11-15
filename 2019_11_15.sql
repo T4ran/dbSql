@@ -119,3 +119,10 @@ AND A.deptno=30;
 SELECT *
 FROM TABLE(dbms_xplan.display);
 
+EXPLAIN PLAN FOR
+SELECT *
+FROM emp
+WHERE ename = 'SCOTT';
+
+SELECT *
+FROM TABLE(dbms_xplan.display);
