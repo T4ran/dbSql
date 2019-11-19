@@ -203,3 +203,23 @@ GROUP BY ROLLUP(job, deptno);
 SELECT deptno, sum(sal) sal
 FROM emp
 GROUP BY ROLLUP(deptno);
+
+--GROUPING SETS (col1, col2...)
+--GROUPING SETS의 나열된 항목이 하나의 서브그룹으로 GROUP BY 절에 이용된다.
+--GROUP BY col1
+--UNION ALL
+--GROUP BY col2
+
+--emp 테이블을 이용하여 부서별 급여합과 담당업무(job)별 급여합을 구하시오.
+--부서번호, job, 급여합계
+SELECT deptno,null job ,sum(sal)
+FROM emp
+GROUP BY deptno
+UNION
+SELECT null, job, sum(sal)
+FROM emp
+GROUP BY job;
+
+SELECT deptno, job, sum(sal)
+FROM emp
+GROUP BY GROUPING SETS(deptno, job, (deptno, job));
