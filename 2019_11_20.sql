@@ -119,4 +119,8 @@ FROM emp_test;
 --emp, emp_test empno컬럼으로 같은 값 끼리 조회
 --1. emp.empno, emp.ename, emp.sal, emp_test.sal
 --2. emp.empno, emp.ename, emp.sal, emp_test.sal, 해당 사원이 속한 부서의 급여평균(emp기준)
-
+SELECT a.empno, a.ename, c.job, a.deptno, a.sal, c.sal, a.avg_sal
+FROM emp_test c JOIN (SELECT a.empno, a.ename, a.sal, a.deptno, b.avg_sal
+FROM emp a JOIN (SELECT deptno, ROUND(AVG(sal),2) avg_sal
+FROM emp
+GROUP BY deptno) b ON (a.deptno = b.deptno)) a ON (c.empno = a.empno);
