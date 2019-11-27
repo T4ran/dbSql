@@ -151,15 +151,15 @@ FROM dept;
 CREATE OR REPLACE PROCEDURE registdept_test
     (p_deptno IN dept_test.deptno%TYPE, p_dname IN dept_test.dname%TYPE, p_loc IN dept_test.loc%TYPE)
 IS
-    var_deptno dept_test.deptno%TYPE;
-    var_dname dept_test.dname%TYPE;
-    var_loc dept_test.loc%TYPE;
 BEGIN
     INSERT INTO dept_test (deptno, dname, loc)
-    VALUES (var_deptno, var_dname, var_loc);
+    VALUES (p_deptno, p_dname, p_loc);
+    
+    commit;
     
     DBMS_OUTPUT.PUT_LINE('deptno, dname, loc = '||p_deptno||', '||p_dname||', '||p_loc);
 END;
 /
 
 exec registdept_test(99,'ddit','dajeon');
+SELECT * FROM dept_test;
